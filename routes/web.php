@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'WeatherController@weather');
+
+Route::get('/orders', 'OrderController@index')->name('orders');
+Route::get('/products', 'ProductController@index')->name('products');
+
+Route::get('/order/{id?}', 'OrderController@order')->name('order');
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+    Route::resource('/order', 'OrderController');
 });
